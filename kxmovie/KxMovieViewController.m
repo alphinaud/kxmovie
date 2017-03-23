@@ -411,7 +411,7 @@ _messageLabel.hidden = YES;
         
         if (sender == _tapGestureRecognizer) {
 
-            [self showHUD: _hiddenHUD];
+            [self showHUD: YES];
             
         } else if (sender == _doubleTapGestureRecognizer) {
                 
