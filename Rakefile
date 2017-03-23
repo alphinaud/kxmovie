@@ -10,10 +10,10 @@ end
 
 ## build ffmpeg
 
-SDK_VERSION='8.1'
+SDK_VERSION='10.2'
 
 XCODE_PATH='/Applications/Xcode.app/Contents/Developer/Platforms'
-GCC_PATH='/Applications/XCode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang'
+GCC_PATH='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang'
 LIB_PATH='/usr/lib/system'
 GASPREP_DEST_PATH='/usr/local/bin'
 PLATOFRM_PATH_SIM ='/iPhoneSimulator.platform'
@@ -27,8 +27,8 @@ FFMPEG_BUILD_ARGS_SIM = [
 '--disable-mmx',
 '--arch=i386',
 '--cpu=i386',
-"--extra-ldflags='-arch i386 -miphoneos-version-min=6.0'",
-"--extra-cflags='-arch i386 -miphoneos-version-min=6.0'",
+"--extra-ldflags='-arch i386 -miphoneos-version-min=8.0'",
+"--extra-cflags='-arch i386 -miphoneos-version-min=8.0'",
 '--disable-asm',
 ]
 
@@ -36,8 +36,8 @@ FFMPEG_BUILD_ARGS_ARMV7 = [
 '--arch=arm',
 '--cpu=cortex-a8',
 '--enable-pic',
-"--extra-cflags='-arch armv7 -miphoneos-version-min=6.0'",
-"--extra-ldflags='-arch armv7 -miphoneos-version-min=6.0'",
+"--extra-cflags='-arch armv7 -miphoneos-version-min=8.0'",
+"--extra-ldflags='-arch armv7 -miphoneos-version-min=8.0'",
 "--extra-cflags='-mfpu=neon -mfloat-abi=softfp'",
 '--enable-neon',
 # '--disable-neon',
@@ -95,6 +95,9 @@ FFMPEG_BUILD_ARGS = [
 #'--enable-nonfree',
 # '--enable-gpl',
 '--enable-version3',
+'--enable-network',
+'--enable-protocol=tcp',
+'--enable-demuxer=rtsp',
 ]
 
 FFMPEG_LIBS = [
@@ -275,7 +278,7 @@ task :build_movie_release do
 
 	system_or_exit "xcodebuild -project kxmovie.xcodeproj -target kxmovie -configuration Release -sdk iphoneos#{SDK_VERSION} build SYMROOT=#{buildDir} -arch armv7"
 
-	system_or_exit "xcodebuild -project kxmovie.xcodeproj -target kxmovie -configuration Debug -sdk iphonesimulator#{SDK_VERSION} build SYMROOT=#{buildDir}"
+	system_or_exit "xcodebuild -project kxmovie.xcodeproj -target kxmovie -configuration Debug -sdk iphonesimulator#{SDK_VERSION} build SYMROOT=#{buildDir} -arch i386"
 	system_or_exit "lipo -create -arch armv7 tmp/build/Release-iphoneos/libkxmovie.a -arch armv7 tmp/build/Release-iphoneos/libkxmovie_armv7s.a -arch arm64 tmp/build/Release-iphoneos/libkxmovie_arm64.a -arch i386 tmp/build/Debug-iphonesimulator/libkxmovie.a -output tmp/build/libkxmovie.a"
 
 	#FileUtils.copy Pathname.new('tmp/build/Release-iphoneos/libkxmovie.a'), buildDir
@@ -293,7 +296,8 @@ task :copy_movie do
 	FileUtils.copy Pathname.new('kxmovie/KxMovieViewController.h'), dest
 	FileUtils.copy Pathname.new('kxmovie/KxAudioManager.h'), dest
 	FileUtils.copy Pathname.new('kxmovie/KxMovieDecoder.h'), dest
-	FileUtils.copy Pathname.new('kxmovie/KxMovieDecoder.h'), dest
+	FileUtils.copy Pathname.new('kxmovie/KxMovieGLView.h'), dest
+	FileUtils.copy Pathname.new('kxmovie/KxLogger.h'), dest
 	FileUtils.copy Pathname.new('kxmovie/Muxer.h'), dest
 	FileUtils.copy_entry Pathname.new('kxmovie/kxmovie.bundle'), dest + 'kxmovie.bundle'
 end

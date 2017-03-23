@@ -779,8 +779,9 @@ static int interrupt_callback(void *ctx);
         AVIOInterruptCB cb = {interrupt_callback, (__bridge void *)(self)};
         formatCtx->interrupt_callback = cb;
     }
-    
-    if (avformat_open_input(&formatCtx, [path cStringUsingEncoding: NSUTF8StringEncoding], NULL, NULL) < 0) {
+    AVDictionary *format_opts = NULL;
+    av_dict_set(&format_opts, "rtsp_flags", "prefer_tcp", 0);
+    if (avformat_open_input(&formatCtx, [path cStringUsingEncoding: NSUTF8StringEncoding], NULL, &format_opts) < 0) {
         
         if (formatCtx)
             avformat_free_context(formatCtx);
