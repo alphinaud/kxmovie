@@ -411,7 +411,7 @@ _messageLabel.hidden = YES;
         
         if (sender == _tapGestureRecognizer) {
 
-            [self showHUD: YES];
+            [self showHUD: _hiddenHUD];
             
         } else if (sender == _doubleTapGestureRecognizer) {
                 
@@ -1285,7 +1285,7 @@ _messageLabel.hidden = YES;
                         options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionTransitionNone
                      animations:^{
                          
-                         CGFloat alpha = _hiddenHUD ? 0 : 1;
+                         CGFloat alpha = _hiddenHUD ? 1 : 1;
                          _topBar.alpha = alpha;
                          _topHUD.alpha = alpha;
                          _bottomBar.alpha = alpha;
