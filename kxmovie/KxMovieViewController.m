@@ -1277,20 +1277,21 @@ _messageLabel.hidden = YES;
 {
     _hiddenHUD = !show;    
     _panGestureRecognizer.enabled = _hiddenHUD;
-        
-    [[UIApplication sharedApplication] setIdleTimerDisabled:_hiddenHUD];
     
-    [UIView animateWithDuration:0.2
-                          delay:0.0
-                        options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionTransitionNone
-                     animations:^{
-                         
-                         CGFloat alpha = _hiddenHUD ? 1 : 1;
-                         _topBar.alpha = alpha;
-                         _topHUD.alpha = alpha;
-                         _bottomBar.alpha = alpha;
-                     }
-                     completion:nil];
+    [[UIApplication sharedApplication] setIdleTimerDisabled:NO];
+    [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
+    
+//    [UIView animateWithDuration:0.2
+//                          delay:0.0
+//                        options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionTransitionNone
+//                     animations:^{
+//                         
+//                         CGFloat alpha = _hiddenHUD ? 1 : 1;
+//                         _topBar.alpha = alpha;
+//                         _topHUD.alpha = alpha;
+//                         _bottomBar.alpha = alpha;
+//                     }
+//                     completion:nil];
     
 }
 
