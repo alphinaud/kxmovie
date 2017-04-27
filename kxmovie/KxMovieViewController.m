@@ -290,6 +290,11 @@ _messageLabel.hidden = YES;
     }
 }
 
+- (void)testAction
+{
+    NSLog(@"Test Action called");
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

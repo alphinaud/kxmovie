@@ -83,7 +83,6 @@ typedef void (^DoneCallbackBlock)();
     BOOL                _savedIdleTimer;
     
     NSDictionary        *_parameters;
-    NSDictionary        *_testParams;
 }
 
 + (id) movieViewControllerWithContentPath: (NSString *) path
@@ -96,6 +95,7 @@ typedef void (^DoneCallbackBlock)();
 
 - (void) play;
 - (void) pause;
+- (void) testAction;
 
 
 @end
