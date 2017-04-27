@@ -63,8 +63,8 @@ static NSMutableDictionary * gHistory;
 
 #define LOCAL_MIN_BUFFERED_DURATION   0.2
 #define LOCAL_MAX_BUFFERED_DURATION   0.4
-#define NETWORK_MIN_BUFFERED_DURATION 2.0
-#define NETWORK_MAX_BUFFERED_DURATION 4.0
+#define NETWORK_MIN_BUFFERED_DURATION 4.0
+#define NETWORK_MAX_BUFFERED_DURATION 5.0
 
 @interface KxMovieViewController (){
     KxMovieGLView       *_glView;
@@ -78,6 +78,8 @@ static NSMutableDictionary * gHistory;
 {
     if (!gHistory)
         gHistory = [NSMutableDictionary dictionary];
+    
+    NSLog(@"Cycliq initialize!");
 }
 
 - (BOOL)prefersStatusBarHidden { return YES; }
