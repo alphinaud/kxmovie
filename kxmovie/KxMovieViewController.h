@@ -83,6 +83,7 @@ typedef void (^DoneCallbackBlock)();
     BOOL                _savedIdleTimer;
     
     NSDictionary        *_parameters;
+    NSDictionary        *_testParams;
 }
 
 + (id) movieViewControllerWithContentPath: (NSString *) path
