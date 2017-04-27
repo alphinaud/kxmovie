@@ -78,8 +78,6 @@ static NSMutableDictionary * gHistory;
 {
     if (!gHistory)
         gHistory = [NSMutableDictionary dictionary];
-    
-    NSLog(@"Cycliq initialize!");
 }
 
 - (BOOL)prefersStatusBarHidden { return YES; }
@@ -482,7 +480,7 @@ _messageLabel.hidden = YES;
     if (_decoder.validAudio)
         [self enableAudio:YES];
 
-    LoggerStream(1, @"play movie");
+    LoggerStream(1, @"play movie cyq");
 }
 
 - (void) pause
@@ -494,7 +492,7 @@ _messageLabel.hidden = YES;
     //_interrupted = YES;
     [self enableAudio:NO];
     [self updatePlayButton];
-    LoggerStream(1, @"pause movie");
+    LoggerStream(1, @"pause movie cyq");
 }
 
 - (void) setMoviePosition: (CGFloat) position
